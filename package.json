@@ -7,7 +7,7 @@
   "author": "Tim Malone <tdmalone@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "cross-env DEBUG=eslint:cli-engine eslint --color --ignore-pattern '/coverage/' --ignore-pattern '/dist/' --ignore-pattern '/rules/' --ignore-pattern '!.*.js' \"**/*.js\"",
+    "lint": "cross-env DEBUG=eslint:cli-engine eslint --color --ignore-pattern '/coverage/' --ignore-pattern '/dist/' --ignore-pattern '!.*.js' \"**/*.js\"",
     "fix": "yarn lint --fix",
     "test": "jest --verbose --coverage"
   },
