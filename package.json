@@ -1,0 +1,36 @@
+{
+  "name": "dasher",
+  "version": "0.0.0",
+  "description": "A custom home automation dashboard.",
+  "homepage": "https://github.com/tdmalone/dasher#readme",
+  "repository": "git+https://github.com/tdmalone/dasher.git",
+  "author": "Tim Malone <tdmalone@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "cross-env DEBUG=eslint:cli-engine eslint --color --ignore-pattern '/coverage/' --ignore-pattern '/docs/' --ignore-pattern '!.eslintrc.js' \"**/*.js\"",
+    "fix": "yarn lint --fix",
+    "test": "jest --verbose --coverage"
+  },
+  "keywords": [
+    "dashboard",
+    "automation",
+    "home-automation"
+  ],
+  "jest": {
+    "testMatch": [
+      "**/tests/**/*.js"
+    ]
+  },
+  "dependencies": {
+    "auth0-js": "^9.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.0",
+    "eslint": "^4.8.0",
+    "eslint-config-tdmalone": "^0.0.1",
+    "jest": "^21.2.1",
+    "jest-tobetype": "^1.1.0",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
+  }
+}
