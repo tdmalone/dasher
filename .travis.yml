@@ -1,0 +1,24 @@
+language: node_js
+services: docker
+node_js: 6.10
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+install: yarn
+
+script:
+  - yarn lint
+  - yarn test
+  - yarn webpack
+
+notifications:
+  email: false
+  webhooks:
+    urls: https://api.tm.id.au/dev/travis/jobStatus
+  slack:
+    on_start: always
+    rooms:
+      - secure: m82a0vNnTjRMpP34Hc6HFI3GFHZDAT+os+2Lym1vW1Vd/ldZosQZxFaKOdLRsb1meT4f9/MdDXW0ZgksXeJuiiVALXae3gXJidChl+PF/pDiCL4ks63KXdgE7ORhfqVdR4JJ56K+CKvpsE79Wb2ohz9GVVdEhNtvWNcGfaBB1Vct/q46mIHNBt7u1PHdLTm2l8WLxQOW6mfm80NS2IsPQBHgUVqXkns4Ptkv5oWKkwcEAimlTefz2vsRGsKsD2Eri+TbOVIll6B1nEyOXo7UIVl5fRMwDRSacqEJe2JXJOnBgi4UJAdlzabFxcvlXrFqBM9RmlDrDyP3rBmnC5rvujoF3RQ3/uMMTY2y97BteGY3B2uIYmxJ/AVUHKtfcl4MknU8AYD4WnA6nS+PPTge4kd3WWSQezkv7OHdD8IYPBnf/kvBePsncaX7uHd79o1KJL+fsHEMKMXPb06dIfJiXCLsPmhuwFitV5rWQdSLxhMHZY0glzv1xz7Y6s3khopRtMJYkKzG8pkAJqpe2MQlCgeJa65xQbk62RP3aAu6wlkVz+FVECwkLzQGyBqG4bR0ixXWRcseq8MpMy6awYTtIFhfApeGCs9hEZdlQYbcF/QyeuS9ZeEo4Z/+fPxZMPmISmuOvOqWkNxZO7JGQpgbMyuZZ4VsLRYN0y6p745yCn4=

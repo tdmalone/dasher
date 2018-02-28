@@ -7,7 +7,7 @@
   "author": "Tim Malone <tdmalone@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "cross-env DEBUG=eslint:cli-engine eslint --color --ignore-pattern '/coverage/' --ignore-pattern '/docs/' --ignore-pattern '!.eslintrc.js' \"**/*.js\"",
+    "lint": "cross-env DEBUG=eslint:cli-engine eslint --color --ignore-pattern '/coverage/' --ignore-pattern '/dist/' --ignore-pattern '/rules/' --ignore-pattern '!.*.js' \"**/*.js\"",
     "fix": "yarn lint --fix",
     "test": "jest --verbose --coverage"
   },
@@ -25,6 +25,7 @@
     "auth0-js": "^9.3.0"
   },
   "devDependencies": {
+    "@chromatix/stylelint-config-chromatix": "^0.1.10",
     "cross-env": "^5.1.0",
     "eslint": "^4.8.0",
     "eslint-config-tdmalone": "^0.0.1",
