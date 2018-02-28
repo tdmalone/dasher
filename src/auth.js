@@ -1,21 +1,24 @@
 
 'use strict';
 
-import auth0 from 'auth0-js';
+const auth0 = require( 'auth0-js' );
 
-export default class Auth {
+window.addEventListener( 'load', function() {
 
-  auth0 = new auth0.WebAuth({
-    domain: 'tdm.au.auth0.com',
-    clientID: 'pSJlMuLu5DxtB2pTjLXlAeR00QdeCcWq',
-    redirectUri: 'https://dasher.tm.id.au',
-    audience: 'https://tdm.au.auth0.com/userinfo',
+  var webAuth = new auth0.WebAuth({
+    domain:       'tdm.au.auth0.com',
+    clientID:     'pSJlMuLu5DxtB2pTjLXlAeR00QdeCcWq',
     responseType: 'token id_token',
-    scope: 'openid'
+    audience:     'https://tdm.au.auth0.com/userinfo',
+    scope:        'openid',
+    redirectUri:  window.location.href
   });
 
-  login() {
-    this.auth0.authorize();
-  }
+  var loginBtn = document.getElementById( 'btn-login' );
 
-}
+  loginBtn.addEventListener( 'click', function( event ) {
+    event.preventDefault();
+    webAuth.authorize();
+  });
+
+});

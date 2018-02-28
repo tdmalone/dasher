@@ -1,7 +1,5 @@
 
 'use strict';
 
-import Auth from './src/auth.js';
+require( './src/auth' );
 
-const auth = new Auth();
-auth.login();
