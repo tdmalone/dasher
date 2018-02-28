@@ -1,6 +1,15 @@
 language: node_js
 services: docker
-node_js: 6.10
+
+# Test the latest AWS Lambda version + latest current.
+# We'll probably run current in production, but some funcs may be deployed to Lambda.
+node_js:
+ - 6.10
+ - node
+
+matrix:
+  allow_failures:
+    - node_js: 6.10
 
 cache:
   yarn: true
