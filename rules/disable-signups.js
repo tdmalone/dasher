@@ -1,5 +1,5 @@
 
-function ( user, context, callback ) {
+function rule( user, context, callback ) {
 
   var errorMessageNew = 'Access denied (disable-signups-new).';
   var errorMessageRetry = 'Access denied (disable-signups-retry).';

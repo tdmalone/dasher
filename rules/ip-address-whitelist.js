@@ -1,5 +1,5 @@
 
-function ( user, context, callback ) {
+function rule( user, context, callback ) {
 
   // Authorized IPs. Add a JSON array as 'ip_address_whitelist' in your Rules settings.
   // @example ["123.45.67.89","98.76.54.32"]
