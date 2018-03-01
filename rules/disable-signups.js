@@ -2,8 +2,6 @@
 /* global auth0, UnauthorizedError */
 /* eslint-disable strict */
 
-const SINGLE_LOGIN = 1;
-
 /**
  * Denies access to any user that doesn't already exist in the system. The user will still be
  * created, but with a metadata setting that will be checked for if they try to log in again.
@@ -12,7 +10,9 @@ function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
 
   'use strict';
 
-  var errorMessage = (
+  const SINGLE_LOGIN = 1;
+
+  const errorMessage = (
     'Access denied for user ID ' + user.user_id + ' ' +
     '(attempt ' + context.stats.loginsCount + ').'
   );

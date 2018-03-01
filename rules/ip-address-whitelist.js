@@ -14,12 +14,12 @@ function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
 
   'use strict';
 
+  const errorMessage = 'Access denied from ' + context.request.ip + '.';
+
   // Get and parse authorized IPs from config.
-  var whitelist = JSON.parse( configuration.ip_address_whitelist );
+  const whitelist = JSON.parse( configuration.ip_address_whitelist );
 
-  var errorMessage = 'Access denied from ' + context.request.ip + '.';
-
-  var userHasAccess = whitelist.some( function( ip ) {
+  const userHasAccess = whitelist.some( function( ip ) {
     return context.request.ip === ip;
   });
 
