@@ -1,24 +1,72 @@
 
 'use strict';
 
-const auth0 = require( 'auth0-js' );
+const auth0 = require( 'auth0-js' ),
+      config = require( '../config' );
 
-window.addEventListener( 'load', function() {
+const FIRST_ITEM = 0;
 
-  var webAuth = new auth0.WebAuth({
-    domain:       'tdm.au.auth0.com',
-    clientID:     'pSJlMuLu5DxtB2pTjLXlAeR00QdeCcWq',
+window.addEventListener( 'load', () => {
+
+  const webAuth = new auth0.WebAuth({
+    domain:       config.authDomain,
+    clientID:     config.authClient,
     responseType: 'token id_token',
-    audience:     'https://tdm.au.auth0.com/userinfo',
+    audience:     'https://' + config.authDomain + '/userinfo',
     scope:        'openid',
     redirectUri:  window.location.href
   });
 
-  var loginBtn = document.getElementById( 'btn-login' );
+  /**
+   * Shows an auth related button, such as login or logout, and handles clicks on it.
+   *
+   * @param {string} buttonType The button to show, either 'login' or 'logout'.
+   * @return {undefined}
+   */
+  const showButton = ( buttonType ) => {
 
-  loginBtn.addEventListener( 'click', function( event ) {
-    event.preventDefault();
-    webAuth.authorize();
-  });
+    const button = document.getElementsByClassName( buttonType + '-button' )[ FIRST_ITEM ];
+    button.style.display = 'block';
 
-});
+    button.addEventListener( 'click', ( event ) => {
+
+      event.preventDefault();
+
+      switch ( buttonType ) {
+
+        case 'login':
+          webAuth.authorize();
+          break;
+
+        case 'logout':
+          alert( 'Log out not implemented yet.' ); // eslint-disable-line no-alert
+          break;
+
+      } // Switch buttonType.
+    }); // Click event.
+  }; // Const showButton.
+
+  if ( ! window.location.hash ) {
+    return showButton( 'login' );
+  }
+
+  return webAuth.parseHash({ hash: window.location.hash }, ( error, authResult ) => {
+
+    if ( error ) {
+      showButton( 'login' );
+      alert( error.errorDescription ); // eslint-disable-line no-alert
+      return console.log( error );
+    }
+
+    webAuth.client.userInfo( authResult.accessToken, ( error, user ) => {
+
+      if ( error ) {
+        return console.log( error );
+      }
+
+      console.log( user );
+      showButton( 'logout' );
+
+    }); // UserInfo.
+  }); // ParseHash.
+}); // Window.load.
