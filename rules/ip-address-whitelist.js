@@ -17,13 +17,14 @@ function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
   // Get and parse authorized IPs from config.
   var whitelist = JSON.parse( configuration.ip_address_whitelist );
 
-  var errorMessage = 'Access denied (ip-address-whitelist).';
+  var errorMessage = 'Access denied from ' + context.request.ip + '.';
 
   var userHasAccess = whitelist.some( function( ip ) {
     return context.request.ip === ip;
   });
 
   if ( ! userHasAccess ) {
+    console.log( errorMessage );
     return callback( new UnauthorizedError( errorMessage ) );
   }
 

@@ -12,15 +12,18 @@ function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
 
   'use strict';
 
-  var errorMessageNew = 'Access denied (disable-signups-new).';
-  var errorMessageRetry = 'Access denied (disable-signups-retry).';
+  var errorMessage = (
+    'Access denied for user ID ' + user.user_id + ' ' +
+    '(attempt ' + context.stats.loginsCount + ').'
+  );
 
   // Initialize app_metadata.
   user.app_metadata = user.app_metadata || {}; // eslint-disable-line camelcase
 
   // Check if the user has already tried to signup previously.
   if ( user.app_metadata.isDisabledSignup ) {
-    return callback( new UnauthorizedError( errorMessageRetry ) );
+    console.log( errorMessage );
+    return callback( new UnauthorizedError( errorMessage ) );
   }
 
   // If it is the first login (hence the `signup`).
@@ -32,7 +35,8 @@ function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
     // Store the app_metadata.
     auth0.users.updateAppMetadata( user.user_id, user.app_metadata )
       .then( function() {
-        return callback( new UnauthorizedError( errorMessageNew ) );
+        console.log( errorMessage );
+        return callback( new UnauthorizedError( errorMessage ) );
       })
       .catch( function( err ) {
         callback( err );
