@@ -1,7 +1,6 @@
 
 /* global configuration, UnauthorizedError */
-
-'use strict';
+/* eslint-disable strict */
 
 /**
  * Denies access to IP address not listed in a custom whitelist.
@@ -12,6 +11,8 @@
  * error.
  */
 function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
+
+  'use strict';
 
   // Get and parse authorized IPs from config.
   var whitelist = JSON.parse( configuration.ip_address_whitelist );

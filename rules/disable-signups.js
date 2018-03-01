@@ -1,7 +1,6 @@
 
 /* global auth0, UnauthorizedError */
-
-'use strict';
+/* eslint-disable strict */
 
 const SINGLE_LOGIN = 1;
 
@@ -10,6 +9,8 @@ const SINGLE_LOGIN = 1;
  * created, but with a metadata setting that will be checked for if they try to log in again.
  */
 function rule( user, context, callback ) { // eslint-disable-line no-unused-vars
+
+  'use strict';
 
   var errorMessageNew = 'Access denied (disable-signups-new).';
   var errorMessageRetry = 'Access denied (disable-signups-retry).';
